@@ -10,7 +10,7 @@ let currentYear = "";
 const profilePicture = "images/yazz.jpg";
 
 
-/* Step 3 - Element Variables */
+/* Step 3 - Element Variables */ 
 
 const nameElement = document.getElementById("name");
 const foodElement = document.getElementById("food");
