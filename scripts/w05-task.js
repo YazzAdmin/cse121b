@@ -110,3 +110,4 @@ getTemples();
 document.querySelector("#sortBy").addEventListener("change", () => {
   sortby(templeList);
 });
+
