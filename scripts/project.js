@@ -6,17 +6,23 @@ let serieList = [];
 
 /* async displaySeries Function */
 const displaySeries = (series) => {
+  
       series.forEach((serie) => {
 
       h3Element = document.createElement("h3");
-      h3Element.innerHTML = `${serie.serieName}`;
-     
+      h3Element.innerHTML = `${serie.name}`;
+      
 
       const articleElement = document.createElement("article");
       const imageElement = document.createElement("img");
+      
+      imageElement.src =`${serie.imageUrl}`;
+      imageElement.alt = `${serie.name}`;
+//      imageElement. = `${serie.type}`;
+      imageElement.width = "200";
+      imageElement.height = "200";
+      imageElement.style.boxShadow = "0px 0px 10px 1px";
 
-      imageElement.src =`${series.imageUrl}`;
-      imageElement.alt = `${serie}`;
 
       serieElement.appendChild(articleElement).appendChild(h3Element);
       serieElement.appendChild(articleElement).appendChild(imageElement);
@@ -28,12 +34,13 @@ const displaySeries = (series) => {
 /* async getSeries Function using fetch()*/
 const getSeries = async () => {
   const response = await fetch(
-    "https://api.jsonbin.io/v3/b/65388cd80574da7622bd5605"
+    "https://api.jsonbin.io/v3/b/6539d4b90574da7622bdc73f"
   ).then((response) => response.json());
-  serieList = response;
+
+  serieList = response.record.series;
+  console.log(serieList);
   displaySeries(serieList);
 };
-
 
 
 /* reset Function */
@@ -55,6 +62,7 @@ const sortby = (series) => {
   
 
   const filter = document.getElementById("sortBy").value;
+  console.log(filter);
   const sortByElement = document.getElementById("sortBy");
   sortByElement.style.position = "absolute;";
 
@@ -72,7 +80,7 @@ const sortby = (series) => {
     case "action":
       reset();
       const series_action = series.filter((serie) =>
-               !serie.type.toLowerCase().includes("Action".toLowerCase())
+               serie.type.toLowerCase().includes("Action".toLowerCase())
           );
       
       displaySeries(series_action);
@@ -81,7 +89,7 @@ const sortby = (series) => {
     case "sad":
       reset();
       const series_sad = series.filter((serie) =>
-               !serie.type.toLowerCase().includes("Sad".toLowerCase())
+               serie.type.toLowerCase().includes("Sad".toLowerCase())
           );
       console.log(series_sad);          
       displaySeries(series_sad);
